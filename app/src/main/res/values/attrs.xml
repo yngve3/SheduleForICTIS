@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorGray90" format="reference" />
+    <attr name="colorGray70" format="reference" />
+    <attr name="colorGray30" format="reference" />
+    <attr name="colorGray10" format="reference" />
+</resources>

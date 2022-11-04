@@ -4,8 +4,8 @@ public class Couple {
     private String timeStart;
     private String timeEnd;
     private int numOfCouple;
-    private String kindOfConducting;
     private String nameOfCouple;
+    private String numOfCoupleStr;
     private String audience;
     private String professor;
     private Boolean isOnline;
@@ -13,7 +13,6 @@ public class Couple {
     public Couple(String timeStart,
                   String timeEnd,
                   int numOfCouple,
-                  String kindOfConducting,
                   String nameOfCouple,
                   String audience,
                   String professor
@@ -21,7 +20,6 @@ public class Couple {
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.numOfCouple = numOfCouple;
-        this.kindOfConducting = kindOfConducting;
         this.nameOfCouple = nameOfCouple;
         this.audience = audience;
         this.professor = professor;
@@ -40,10 +38,6 @@ public class Couple {
         return numOfCouple;
     }
 
-    public String getKindOfConducting() {
-        return kindOfConducting;
-    }
-
     public String getNameOfCouple() {
         return nameOfCouple;
     }
@@ -60,7 +54,15 @@ public class Couple {
         return isOnline;
     }
 
+    public String getNumOfCoupleStr() {
+        return numOfCoupleStr;
+    }
+
+    public void setNumOfCoupleStr(String numOfCoupleStr) {
+        this.numOfCoupleStr = numOfCoupleStr;
+    }
+
     private void setOnline() {
-        this.isOnline = kindOfConducting.equals("LMS") || kindOfConducting.equals("LMS-1");
+        this.isOnline = audience.equals("LMS");
     }
 }

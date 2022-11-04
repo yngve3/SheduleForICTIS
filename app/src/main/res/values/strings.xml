@@ -3,4 +3,32 @@
     <string name="time">Time</string>
     <string name="name">Name</string>
     <string name="n">N</string>
+
+    <string-array name="num_of_week_abbr">
+        <item>ПН</item>
+        <item>ВТ</item>
+        <item>СР</item>
+        <item>ЧТ</item>
+        <item>ПТ</item>
+        <item>СБ</item>
+    </string-array>
+
+    <string-array name="num_of_week_full">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+    </string-array>
+
+    <string-array name="num_of_couple">
+        <item>Первая пара</item>
+        <item>Вторая пара</item>
+        <item>Третья пара</item>
+        <item>Четверная пара</item>
+        <item>Пятая пара</item>
+        <item>Шестая пара</item>
+        <item>Седьмая пара</item>
+    </string-array>
 </resources>

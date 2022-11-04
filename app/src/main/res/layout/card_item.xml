@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
+    app:cardCornerRadius="8dp"
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginRight="32dp"
+    android:layout_marginHorizontal="8dp"
     android:gravity="center_vertical"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -16,11 +15,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/back_couple"
+        android:paddingVertical="10dp">
 
 
         <TextView
@@ -28,19 +25,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginVertical="4dp"
-            android:background="@drawable/num_of_couple_style"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/back_couple_num"
             android:text="Первая пара"
-            android:textSize="9sp"
+            android:textSize="10sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorGray90"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toStartOf="@id/guideline2"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp"
+            android:textAllCaps="true"/>
 
         <ImageView
             android:id="@+id/ivIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@id/tvNumOfCouple"
             app:layout_constraintStart_toEndOf="@id/tvNumOfCouple"
@@ -53,14 +53,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="Практика"
-            android:textSize="9sp"
+            android:textSize="10sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorGray90"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintBottom_toBottomOf="@id/ivIndicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivIndicator"
             app:layout_constraintTop_toTopOf="@id/ivIndicator"
             app:layout_constraintHorizontal_bias="0.0"
-            tools:ignore="SmallSp" />
+            tools:ignore="SmallSp"
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/tvNameOfCouple"
@@ -70,8 +73,10 @@
             android:layout_marginEnd="50dp"
             android:layout_marginTop="4dp"
             android:text="ОБЖ"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorGray90"
+            android:fontFamily="@font/roboto"
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline2"
@@ -85,8 +90,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="50dp"
             android:text="Г-112"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorGray70"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvNameOfCouple"
             app:layout_constraintTop_toBottomOf="@id/tvNameOfCouple"
@@ -100,7 +107,9 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="50dp"
             android:text="Хусаинов Н.Ш."
-            android:textSize="10sp"
+            android:textSize="14sp"
+            android:textColor="?attr/colorGray70"
+            android:fontFamily="@font/roboto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvAudience"
             app:layout_constraintTop_toBottomOf="@id/tvAudience"
@@ -112,10 +121,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
             android:text="13:45"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorGray90"
+            android:fontFamily="@font/roboto"
             app:layout_constraintEnd_toStartOf="@id/guideline2"
             app:layout_constraintTop_toBottomOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,9 +138,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="8dp"
             android:text="15:20"
-            android:textSize="11sp"
+            android:textSize="14sp"
+            android:textColor="?attr/colorGray70"
+            android:fontFamily="@font/roboto"
             app:layout_constraintEnd_toStartOf="@id/guideline2"
             app:layout_constraintTop_toBottomOf="@id/tvTimeStart"
             app:layout_constraintStart_toStartOf="parent"
@@ -148,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="60dp" />
+            app:layout_constraintGuide_begin="70dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

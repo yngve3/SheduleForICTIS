@@ -18,4 +18,8 @@ public class Week {
     public List<Day> getWeek() {
         return week;
     }
+
+    public Day getDay(int position) {
+        return week.get(position);
+    }
 }

@@ -6,16 +6,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-public class DaysOfWeekAdapter extends FragmentStateAdapter {
-    public DaysOfWeekAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
-        super(fragmentManager, lifecycle);
-    }
+import com.example.sheduleforictis.models.Week;
 
+public class DaysOfWeekAdapter extends FragmentStateAdapter {
+    private Week week;
+    public DaysOfWeekAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, Week week) {
+        super(fragmentManager, lifecycle);
+        this.week = week;
+    }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new ScheduleDayFragment();
+        return new ScheduleDayFragment(week.getDay(position));
     }
 
     @Override
