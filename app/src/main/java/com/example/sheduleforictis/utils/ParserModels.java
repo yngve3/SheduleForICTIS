@@ -1,4 +1,4 @@
-package com.example.sheduleforictis;
+package com.example.sheduleforictis.utils;
 
 import com.example.sheduleforictis.models.Couple;
 import com.example.sheduleforictis.models.Day;
@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Parser {
-    public static Week parse(RequestModel requestModel, String[] numOfCouples) {
+public class ParserModels {
+    public static Week parseFromNetwork(RequestModel requestModel) {
         int numOfWeek = requestModel.getTable().getWeek();
         List<List<String>> table = requestModel.getTable().getTable();
 
@@ -61,7 +61,6 @@ public class Parser {
                 timeEnd = table.get(1).get(j).split("-")[1];
 
                 Couple couple = new Couple(timeStart, timeEnd, numOfCouple, nameOfCouple, audience.toString(), professor.toString());
-                couple.setNumOfCoupleStr(numOfCouples[numOfCouple - 1]);
 
                 couples.add(couple);
             }
@@ -71,4 +70,5 @@ public class Parser {
 
         return new Week(numOfWeek, days);
     }
+
 }

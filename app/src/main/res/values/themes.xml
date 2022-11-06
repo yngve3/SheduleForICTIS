@@ -21,5 +21,7 @@
         <item name="colorGray70">@color/colorGray70</item>
         <item name="colorGray30">@color/colorGray30</item>
         <item name="colorGray10">@color/colorGray10</item>
+
+        <item name="colorGray20">@color/colorGray20</item>
     </style>
 </resources>

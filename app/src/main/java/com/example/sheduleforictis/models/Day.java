@@ -1,5 +1,7 @@
 package com.example.sheduleforictis.models;
 
+import androidx.room.Entity;
+
 import java.util.List;
 
 public class Day {

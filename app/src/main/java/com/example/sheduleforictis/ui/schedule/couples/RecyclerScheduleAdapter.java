@@ -1,4 +1,4 @@
-package com.example.sheduleforictis;
+package com.example.sheduleforictis.ui.schedule.couples;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,13 +7,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.models.Couple;
 
 import java.util.List;
 
-public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHolder> {
+public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerScheduleAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClick(Couple couple);
@@ -21,15 +23,18 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        @StringRes
+        private static final int[] IS_ONLINE = new int[]{R.string.offline, R.string.online};
+
         private final TextView tvTimeStart;
         private final TextView tvTimeEnd;
         private final TextView tvNumOfCouple;
-        //private final TextView tvKindOfConducting;
+        private final TextView tvKindOfConducting;
         private final TextView tvNameOfCouple;
         private final TextView tvAudience;
         private final TextView tvProfessor;
 
-        private final ImageView ivIndicator;
+        private final View ivIndicator;
 
         public ViewHolder(@NonNull View v) {
             super(v);
@@ -37,7 +42,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             tvTimeStart = v.findViewById(R.id.tvTimeStart);
             tvTimeEnd = v.findViewById(R.id.tvTimeEnd);
             tvNumOfCouple = v.findViewById(R.id.tvNumOfCouple);
-            //tvKindOfConducting = v.findViewById(R.id.tvKindOfConducting);
+            tvKindOfConducting = v.findViewById(R.id.tvKindOfConducting);
             tvNameOfCouple = v.findViewById(R.id.tvNameOfCouple);
             tvAudience = v.findViewById(R.id.tvAudience);
             tvProfessor = v.findViewById(R.id.tvProfessor);
@@ -49,13 +54,17 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
             tvTimeStart.setText(couple.getTimeStart());
             tvTimeEnd.setText(couple.getTimeEnd());
             tvNumOfCouple.setText(couple.getNumOfCoupleStr());
-            //tvKindOfConducting.setText(couple.getKindOfConducting());
             tvNameOfCouple.setText(couple.getNameOfCouple());
             tvAudience.setText(couple.getAudience());
             tvProfessor.setText(couple.getProfessor());
 
-            if (couple.getOnline()) ivIndicator.setImageResource(R.drawable.green_circle);
-            ivIndicator.setImageResource(R.drawable.red_circle);
+            if (couple.getOnline()) {
+                ivIndicator.setBackgroundResource(R.drawable.indicator_green);
+                tvKindOfConducting.setText(IS_ONLINE[1]);
+            } else {
+                tvKindOfConducting.setText(IS_ONLINE[0]);
+                ivIndicator.setBackgroundResource(R.drawable.indicator_red);
+            }
 
             itemView.setOnClickListener(view -> listener.onItemClick(couple));
         }
@@ -64,14 +73,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     private final List<Couple> couples;
     private final OnItemClickListener listener;
 
-    public ScheduleAdapter(List<Couple> couples, OnItemClickListener listener) {
+    public RecyclerScheduleAdapter(List<Couple> couples, OnItemClickListener listener) {
         this.couples = couples;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public ScheduleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecyclerScheduleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_item, parent, false);
 
@@ -79,7 +88,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScheduleAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerScheduleAdapter.ViewHolder holder, int position) {
         holder.bind(couples.get(position), listener);
     }
 

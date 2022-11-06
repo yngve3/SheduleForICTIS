@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="4dp"
+
             android:background="@drawable/back_couple_num"
             android:text="Первая пара"
             android:textSize="10sp"
@@ -37,15 +38,15 @@
             tools:ignore="SmallSp"
             android:textAllCaps="true"/>
 
-        <ImageView
+        <View
             android:id="@+id/ivIndicator"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@id/tvNumOfCouple"
             app:layout_constraintStart_toEndOf="@id/tvNumOfCouple"
-            app:layout_constraintTop_toTopOf="@id/tvNumOfCouple"
-            app:srcCompat="@android:drawable/ic_notification_overlay" />
+            app:layout_constraintTop_toTopOf="@id/tvNumOfCouple" />
 
         <TextView
             android:id="@+id/tvKindOfConducting"

@@ -2,7 +2,9 @@
     <string name="app_name">SheduleForICTIS</string>
     <string name="time">Time</string>
     <string name="name">Name</string>
-    <string name="n">N</string>
+
+    <string name="online">Онлайн</string>
+    <string name="offline">Очно</string>
 
     <string-array name="num_of_week_abbr">
         <item>ПН</item>
