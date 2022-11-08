@@ -5,38 +5,39 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.databinding.FragmentScheduleDayBinding;
 import com.example.sheduleforictis.models.Couple;
 import com.example.sheduleforictis.models.Day;
-import com.example.sheduleforictis.models.Week;
 import com.example.sheduleforictis.ui.schedule.MainViewModel;
+import com.example.sheduleforictis.ui.schedule.couples.note.edit_note.EditNoteFragment;
+import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListOfNotesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScheduleDayFragment extends Fragment {
+public class ScheduleDayFragment extends Fragment implements
+        RecyclerScheduleAdapter.OnItemClickListener
+{
 
     private int positionFragment;
 
     private RecyclerScheduleAdapter recyclerScheduleAdapter;
-    private LinearLayoutManager linearLayoutManager;
     private MainViewModel viewModel;
     private Day day;
     private List<Couple> couples;
 
     private FragmentScheduleDayBinding binding;
     private String[] numOfCouples;
+
+    private ListOfNotesFragment listOfNotesFragment;
 
     public ScheduleDayFragment(int positionFragment) {
         this.positionFragment = positionFragment;
@@ -84,13 +85,23 @@ public class ScheduleDayFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void setupRecyclerViewAdapter() {
         if (recyclerScheduleAdapter == null) {
-            recyclerScheduleAdapter = new RecyclerScheduleAdapter(couples, couple -> {
-                //TODO: Заметки
-            });
+            recyclerScheduleAdapter = new RecyclerScheduleAdapter(couples, this);
             binding.rvSchedule.setLayoutManager(new LinearLayoutManager(getContext()));
             binding.rvSchedule.setAdapter(recyclerScheduleAdapter);
         } else {
             recyclerScheduleAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onItemClick(Couple couple) {
+        listOfNotesFragment = new ListOfNotesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("nameOfCoupleInListOfNotes", couple.getNameOfCouple());
+        String date = day.getDayOfWeek() + ", " + day.getDayOfMonth() + " " + day.getMonth();
+        bundle.putString("dateOfCoupleInListOfNotes", date);
+        bundle.putInt("numOfCoupleInListOfNotes", couple.getNumOfCouple());
+        listOfNotesFragment.setArguments(bundle);
+        listOfNotesFragment.show(getParentFragmentManager(), ListOfNotesFragment.TAG);
     }
 }

@@ -21,9 +21,9 @@ public class Couple {
         this.timeEnd = timeEnd;
         this.numOfCouple = numOfCouple;
         this.nameOfCouple = nameOfCouple;
-        this.audience = audience;
         this.professor = professor;
-        setOnline();
+        setAudience(audience);
+        setOnline(audience);
     }
 
     public String getTimeStart() {
@@ -62,7 +62,14 @@ public class Couple {
         this.numOfCoupleStr = numOfCoupleStr;
     }
 
-    private void setOnline() {
+    private void setOnline(String audience) {
         this.isOnline = audience.equals("LMS");
+        System.out.println("hello");
+    }
+
+    private void setAudience(String audience) {
+        if (audience.equals("LMS")) this.audience = "Онлайн";
+        else this.audience = audience;
+        System.out.println("hello");
     }
 }

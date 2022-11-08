@@ -23,13 +23,9 @@ public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerSchedu
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @StringRes
-        private static final int[] IS_ONLINE = new int[]{R.string.offline, R.string.online};
-
         private final TextView tvTimeStart;
         private final TextView tvTimeEnd;
         private final TextView tvNumOfCouple;
-        private final TextView tvKindOfConducting;
         private final TextView tvNameOfCouple;
         private final TextView tvAudience;
         private final TextView tvProfessor;
@@ -42,7 +38,6 @@ public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerSchedu
             tvTimeStart = v.findViewById(R.id.tvTimeStart);
             tvTimeEnd = v.findViewById(R.id.tvTimeEnd);
             tvNumOfCouple = v.findViewById(R.id.tvNumOfCouple);
-            tvKindOfConducting = v.findViewById(R.id.tvKindOfConducting);
             tvNameOfCouple = v.findViewById(R.id.tvNameOfCouple);
             tvAudience = v.findViewById(R.id.tvAudience);
             tvProfessor = v.findViewById(R.id.tvProfessor);
@@ -60,9 +55,7 @@ public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerSchedu
 
             if (couple.getOnline()) {
                 ivIndicator.setBackgroundResource(R.drawable.indicator_green);
-                tvKindOfConducting.setText(IS_ONLINE[1]);
             } else {
-                tvKindOfConducting.setText(IS_ONLINE[0]);
                 ivIndicator.setBackgroundResource(R.drawable.indicator_red);
             }
 

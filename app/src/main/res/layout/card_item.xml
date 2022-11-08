@@ -49,7 +49,7 @@
             app:layout_constraintTop_toTopOf="@id/tvNumOfCouple" />
 
         <TextView
-            android:id="@+id/tvKindOfConducting"
+            android:id="@+id/tvAudience"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -85,23 +85,6 @@
             app:layout_constraintHorizontal_bias="0.0"/>
 
         <TextView
-            android:id="@+id/tvAudience"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="50dp"
-            android:text="Г-112"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorGray70"
-            android:fontFamily="@font/roboto_bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvNameOfCouple"
-            app:layout_constraintTop_toBottomOf="@id/tvNameOfCouple"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constrainedWidth="true"/>
-
-        <TextView
             android:id="@+id/tvProfessor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,8 +95,8 @@
             android:textColor="?attr/colorGray70"
             android:fontFamily="@font/roboto"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvAudience"
-            app:layout_constraintTop_toBottomOf="@id/tvAudience"
+            app:layout_constraintStart_toStartOf="@id/tvNameOfCouple"
+            app:layout_constraintTop_toBottomOf="@id/tvNameOfCouple"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constrainedWidth="true"/>
 

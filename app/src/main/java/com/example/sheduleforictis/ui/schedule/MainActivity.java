@@ -1,5 +1,6 @@
 package com.example.sheduleforictis.ui.schedule;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,7 +20,11 @@ import com.example.sheduleforictis.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +57,20 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        LocalDate date;
+        int dayOfWeek;
+        boolean flag;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            date = LocalDate.now();
+            dayOfWeek = date.getDayOfWeek().getValue();
+            flag = true;
+        } else {
+            dayOfWeek = -1;
+            flag = false;
+        }
+
+
         tvDateNow = binding.tvDateNow;
         tvStudyWeek = binding.tvStudyWeek;
 
@@ -75,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 tab.setCustomView(tv);
             }).attach();
 
+            if (flag && dayOfWeek != 7) {
+                Objects.requireNonNull(binding.tlDaysOfWeek.getTabAt(dayOfWeek - 1)).select();
+            }
         });
 
         binding.tlDaysOfWeek.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -96,5 +119,14 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            super.onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

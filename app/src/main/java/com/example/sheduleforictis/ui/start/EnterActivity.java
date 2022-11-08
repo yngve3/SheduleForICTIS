@@ -1,5 +1,7 @@
 package com.example.sheduleforictis.ui.start;
 
-public class EnterActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EnterActivity extends AppCompatActivity {
 
 }

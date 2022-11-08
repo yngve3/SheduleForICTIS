@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="Theme.SheduleForICTIS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorAccent">@color/colorMain</item>
+        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimaryDark">@color/colorGray30</item>
+        <item name="colorControlNormal">@color/colorGray30</item>
+        <item name="colorControlHighlight">#50CDCDCD</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <!-- Status bar color. -->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowTranslucentStatus">false</item>
@@ -22,6 +22,12 @@
         <item name="colorGray30">@color/colorGray30</item>
         <item name="colorGray10">@color/colorGray10</item>
 
+        <item name="colorGray80">@color/colorGray80</item>
         <item name="colorGray20">@color/colorGray20</item>
+
+        <item name="colorWhite">@color/colorWhite</item>
+        <item name="colorBlack">@color/colorBlack</item>
+        <item name="colorMain">@color/colorMain</item>
+
     </style>
 </resources>

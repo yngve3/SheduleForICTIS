@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorBlack">#1a1a1a</color>
+    <color name="colorMain">#587FC7</color>
+
 
     <color name="colorGray90">#2A2A2A</color>
     <color name="colorGray80">#3C3C3C</color>
@@ -19,9 +23,9 @@
 
     <color name="darkMain">#881a1a1a</color>
 
-    <color name="colorTransparent">#881a1a1a</color>
-    <color name="colorNavigationLight">#886B6B6B</color>
-    <color name="colorNavigationDark">#881a1a1a</color>
+    <color name="colorTransparent">#1a1a1a</color>
+    <color name="colorNavigationLight">#6B6B6B</color>
+    <color name="colorNavigationDark">#1a1a1a</color>
 
     <color name="greenInd">#558a10</color>
     <color name="redInd">#dc4439</color>
