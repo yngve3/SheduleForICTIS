@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 tab.setCustomView(tv);
             }).attach();
 
+
             if (flag && dayOfWeek != 7) {
                 Objects.requireNonNull(binding.tlDaysOfWeek.getTabAt(dayOfWeek - 1)).select();
             }

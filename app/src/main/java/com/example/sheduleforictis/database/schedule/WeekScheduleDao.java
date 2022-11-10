@@ -1,9 +1,8 @@
-package com.example.sheduleforictis.database;
+package com.example.sheduleforictis.database.schedule;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;

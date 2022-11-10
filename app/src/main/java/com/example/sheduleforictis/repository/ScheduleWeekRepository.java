@@ -31,7 +31,7 @@ public class ScheduleWeekRepository {
 
 
     public LiveData<Week> getCurrentWeekScheduleByIdGroup(String id) {
-        return App.getInstance().getDao().getWeekSchedule();
+        return App.getInstance().getWeekScheduleDao().getWeekSchedule();
     }
 
     public LiveData<Week> getCurrentWeekScheduleByIdGroupFromNet(String id) {
@@ -41,7 +41,7 @@ public class ScheduleWeekRepository {
                 assert response.body() != null;
                 weekSchedule.setValue(ParserModels.parseFromNetwork(response.body()));
                 new Thread(() ->
-                        App.getInstance().getDao().insertWeekSchedule(ParserModels.parseFromNetwork(response.body()))
+                        App.getInstance().getWeekScheduleDao().insertWeekSchedule(ParserModels.parseFromNetwork(response.body()))
                 ).start();
             }
 

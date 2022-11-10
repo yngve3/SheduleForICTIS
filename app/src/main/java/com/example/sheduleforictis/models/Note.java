@@ -1,11 +1,19 @@
 package com.example.sheduleforictis.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "note_table")
 public class Note {
-    private final String textOfNote;
-    private final String dateOfNote;
+    @PrimaryKey
+    public int id;
+    private String textOfNote;
+    @NonNull private final String dateOfNote;
     private final int numOfCoupleNote;
 
-    public Note(String textOfNote, String dateOfNote, int numOfCoupleNote) {
+    public Note(String textOfNote, @NonNull String dateOfNote, int numOfCoupleNote) {
         this.textOfNote = textOfNote;
         this.dateOfNote = dateOfNote;
         this.numOfCoupleNote = numOfCoupleNote;
@@ -15,6 +23,7 @@ public class Note {
         return textOfNote;
     }
 
+    @NonNull
     public String getDateOfNote() {
         return dateOfNote;
     }
@@ -22,4 +31,8 @@ public class Note {
     public int getNumOfCoupleNote() {
         return numOfCoupleNote;
     }
+
+    @Ignore
+    public void changeText(String text) { textOfNote = text; }
+
 }

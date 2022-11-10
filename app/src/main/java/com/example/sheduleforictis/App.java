@@ -4,18 +4,27 @@ import android.app.Application;
 
 import androidx.room.Room;
 
-import com.example.sheduleforictis.database.WeekScheduleDao;
-import com.example.sheduleforictis.database.WeekScheduleDatabase;
+import com.example.sheduleforictis.database.notes.NotesDao;
+import com.example.sheduleforictis.database.notes.NotesDatabase;
+import com.example.sheduleforictis.database.schedule.WeekScheduleDao;
+import com.example.sheduleforictis.database.schedule.WeekScheduleDatabase;
 
 public class App extends Application {
     private static App instance;
-    private WeekScheduleDatabase database;
+    private WeekScheduleDatabase weekScheduleDatabase;
+    private NotesDatabase notesDatabase;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        database = Room.databaseBuilder(this, WeekScheduleDatabase.class, "database")
+        weekScheduleDatabase = Room
+                .databaseBuilder(this, WeekScheduleDatabase.class, "weekScheduleDatabase")
+                .build();
+
+        notesDatabase = Room
+                .databaseBuilder(this, NotesDatabase.class, "notesDatabase")
+                .fallbackToDestructiveMigration()
                 .build();
     }
 
@@ -23,11 +32,9 @@ public class App extends Application {
         return instance;
     }
 
-    public WeekScheduleDao getDao() {
-        return database.weekScheduleDao();
+    public WeekScheduleDao getWeekScheduleDao() {
+        return weekScheduleDatabase.weekScheduleDao();
     }
 
-    public WeekScheduleDatabase getDatabase() {
-        return database;
-    }
+    public NotesDao getNotesDao() { return  notesDatabase.notesDao(); }
 }

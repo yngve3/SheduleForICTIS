@@ -1,23 +1,24 @@
 package com.example.sheduleforictis.ui.schedule.couples.note.edit_note;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.databinding.FragmentEditNoteBinding;
+import com.example.sheduleforictis.models.Note;
 import com.example.sheduleforictis.ui.schedule.MainActivity;
+import com.example.sheduleforictis.ui.schedule.couples.note.NotesViewModel;
 
 import java.util.Objects;
 
@@ -28,7 +29,12 @@ public class EditNoteFragment extends Fragment {
     private FragmentEditNoteBinding binding;
     private EditNoteRecyclerAdapter editNoteRecyclerAdapter;
 
-    private String textOfNote;
+    private NotesViewModel viewModel;
+
+    private String newText;
+
+    private Note note;
+    private String nameOfCouple;
 
     @Nullable
     @Override
@@ -37,13 +43,13 @@ public class EditNoteFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        assert getArguments() != null;
-        editNoteRecyclerAdapter = new EditNoteRecyclerAdapter(getArguments()
-                .getString("textNote"), (text) -> {
-                    textOfNote = text;
-        });
+        viewModel = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
+        note = viewModel.getEditableNote();
+        nameOfCouple = viewModel.getNameOfCouple();
+        editNoteRecyclerAdapter = new EditNoteRecyclerAdapter(note.getTextOfNote(), (text) -> newText = text);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setReverseLayout(true);
@@ -53,15 +59,24 @@ public class EditNoteFragment extends Fragment {
         ((MainActivity) requireActivity()).setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(((MainActivity) requireActivity()).getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        binding.tvDateOfNote.setText(getArguments().getString("dateOfNote"));
-        binding.tvNameOfCoupleNote.setText(getArguments().getString("nameOfCoupleNote"));
+        binding.tvDateOfNote.setText(note.getDateOfNote());
+        binding.tvNameOfCoupleNote.setText(nameOfCouple);
 
         binding.btnSaveNote.setOnClickListener(view1 -> {
-            getParentFragmentManager().beginTransaction().remove(this).commit();
             InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            if (textOfNote != null)
-                Toast.makeText(getContext(), textOfNote, Toast.LENGTH_LONG).show();
+            if (newText != null) {
+                note.changeText(newText);
+                viewModel.insertNote(note);
+                getParentFragmentManager().beginTransaction().remove(this).commit();
+            } else {
+                if (note.getTextOfNote().equals("")) {
+                    Toast.makeText(requireContext(), "Текст заметки не должен быть пустым", Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    getParentFragmentManager().beginTransaction().remove(this).commit();
+                }
+            }
         });
 
     }

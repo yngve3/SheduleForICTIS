@@ -17,8 +17,7 @@ import com.example.sheduleforictis.databinding.FragmentScheduleDayBinding;
 import com.example.sheduleforictis.models.Couple;
 import com.example.sheduleforictis.models.Day;
 import com.example.sheduleforictis.ui.schedule.MainViewModel;
-import com.example.sheduleforictis.ui.schedule.couples.note.edit_note.EditNoteFragment;
-import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListOfNotesFragment;
+import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListListenerOfNotesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class ScheduleDayFragment extends Fragment implements
     private FragmentScheduleDayBinding binding;
     private String[] numOfCouples;
 
-    private ListOfNotesFragment listOfNotesFragment;
+    private ListListenerOfNotesFragment listOfNotesFragment;
 
     public ScheduleDayFragment(int positionFragment) {
         this.positionFragment = positionFragment;
@@ -95,13 +94,13 @@ public class ScheduleDayFragment extends Fragment implements
 
     @Override
     public void onItemClick(Couple couple) {
-        listOfNotesFragment = new ListOfNotesFragment();
+        listOfNotesFragment = new ListListenerOfNotesFragment();
         Bundle bundle = new Bundle();
         bundle.putString("nameOfCoupleInListOfNotes", couple.getNameOfCouple());
         String date = day.getDayOfWeek() + ", " + day.getDayOfMonth() + " " + day.getMonth();
         bundle.putString("dateOfCoupleInListOfNotes", date);
         bundle.putInt("numOfCoupleInListOfNotes", couple.getNumOfCouple());
         listOfNotesFragment.setArguments(bundle);
-        listOfNotesFragment.show(getParentFragmentManager(), ListOfNotesFragment.TAG);
+        listOfNotesFragment.show(getParentFragmentManager(), ListListenerOfNotesFragment.TAG);
     }
 }

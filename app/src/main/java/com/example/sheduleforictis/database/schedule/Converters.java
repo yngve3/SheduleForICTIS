@@ -1,4 +1,4 @@
-package com.example.sheduleforictis.database;
+package com.example.sheduleforictis.database.schedule;
 
 import androidx.room.TypeConverter;
 

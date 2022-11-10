@@ -5,7 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.sheduleforictis.database.Converters;
+import com.example.sheduleforictis.database.schedule.Converters;
 
 import java.util.ArrayList;
 import java.util.List;

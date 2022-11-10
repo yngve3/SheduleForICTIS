@@ -11,8 +11,6 @@ import java.util.Objects;
 
 public class MainViewModel extends ViewModel {
     private LiveData<Week> weekSchedule;
-    private LiveData<String> tabTitleMonth;
-    private LiveData<String> tabTitleDay;
     private final ScheduleWeekRepository repository;
 
     public MainViewModel() {
