@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SheduleForICTIS"
         tools:targetApi="31"
-        android:name=".App">
+        android:name=".application.App">
         <activity
             android:name=".ui.schedule.MainActivity"
             android:exported="true">

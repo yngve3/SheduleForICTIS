@@ -1,11 +1,8 @@
 package com.example.sheduleforictis.repository;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.example.sheduleforictis.App;
+import com.example.sheduleforictis.application.App;
 import com.example.sheduleforictis.models.Note;
 
 import java.util.List;

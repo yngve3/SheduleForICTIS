@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.sheduleforictis.App;
+import com.example.sheduleforictis.application.App;
 import com.example.sheduleforictis.models.Week;
 import com.example.sheduleforictis.network.NetworkService;
 import com.example.sheduleforictis.network.models.RequestModel;

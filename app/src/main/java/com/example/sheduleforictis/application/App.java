@@ -1,4 +1,4 @@
-package com.example.sheduleforictis;
+package com.example.sheduleforictis.application;
 
 import android.app.Application;
 
@@ -24,7 +24,6 @@ public class App extends Application {
 
         notesDatabase = Room
                 .databaseBuilder(this, NotesDatabase.class, "notesDatabase")
-                .fallbackToDestructiveMigration()
                 .build();
     }
 
