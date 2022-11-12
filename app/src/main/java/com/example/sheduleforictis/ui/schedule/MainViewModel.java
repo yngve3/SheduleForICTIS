@@ -4,22 +4,26 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.sheduleforictis.models.Note;
+import com.example.sheduleforictis.repository.NotesRepository;
 import com.example.sheduleforictis.repository.ScheduleWeekRepository;
 import com.example.sheduleforictis.models.Week;
 
-import java.util.Objects;
+import java.util.List;
 
 public class MainViewModel extends ViewModel {
     private LiveData<Week> weekSchedule;
-    private final ScheduleWeekRepository repository;
+    private final ScheduleWeekRepository scheduleWeekRepository;
+    private final NotesRepository notesRepository;
 
     public MainViewModel() {
         weekSchedule = new MutableLiveData<>();
-        repository = ScheduleWeekRepository.getInstance();
+        scheduleWeekRepository = ScheduleWeekRepository.getInstance();
+        notesRepository = NotesRepository.getInstance();
     }
 
     public LiveData<Week> getCurrentWeekScheduleFromNet(String id) {
-        weekSchedule = repository.getCurrentWeekScheduleByIdGroupFromNet(id);
+        weekSchedule = scheduleWeekRepository.getCurrentWeekScheduleByIdGroupFromNet(id);
         return weekSchedule;
     }
 
@@ -28,7 +32,12 @@ public class MainViewModel extends ViewModel {
         return weekSchedule;
     }
 
-    private LiveData<Week> loadCurrentWeekSchedule(String id) {
-        return repository.getCurrentWeekScheduleByIdGroup(id);
+    public void insertNotesInBD(List<Note> notes) {
+        notesRepository.insertNotes(notes);
     }
+
+    private LiveData<Week> loadCurrentWeekSchedule(String id) {
+        return scheduleWeekRepository.getCurrentWeekScheduleByIdGroup(id);
+    }
+
 }

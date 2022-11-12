@@ -5,7 +5,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -62,7 +61,7 @@ public class EditNoteRecyclerAdapter extends RecyclerView.Adapter<EditNoteRecycl
     @Override
     public EditNoteRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.note_note_edit, parent, false);
+                .inflate(R.layout.item_note_edit_note, parent, false);
 
         return new EditNoteRecyclerAdapter.ViewHolder(v);
     }

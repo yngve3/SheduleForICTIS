@@ -10,12 +10,26 @@ public class Note {
     @PrimaryKey
     public int id;
     private String textOfNote;
-    @NonNull private final String dateOfNote;
-    private final int numOfCoupleNote;
+    @NonNull private String dateOfNote;
+    private int numOfCoupleNote;
 
     public Note(String textOfNote, @NonNull String dateOfNote, int numOfCoupleNote) {
         this.textOfNote = textOfNote;
         this.dateOfNote = dateOfNote;
+        this.numOfCoupleNote = numOfCoupleNote;
+    }
+
+    public Note() {}
+
+    public void setTextOfNote(String textOfNote) {
+        this.textOfNote = textOfNote;
+    }
+
+    public void setDateOfNote(@NonNull String dateOfNote) {
+        this.dateOfNote = dateOfNote;
+    }
+
+    public void setNumOfCoupleNote(int numOfCoupleNote) {
         this.numOfCoupleNote = numOfCoupleNote;
     }
 

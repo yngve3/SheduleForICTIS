@@ -54,17 +54,17 @@ public class ListOfNotesRecyclerAdapter extends RecyclerView.Adapter<RecyclerVie
         switch (viewType) {
             case HEADER: {
                 @SuppressLint("InflateParams") View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.title_notes_dialog, null);
+                        .inflate(R.layout.item_notes_list_title, null);
                 return new HeaderHolder(v);
             }
             case ITEM: {
                 @SuppressLint("InflateParams") View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.note_notes_dialog, null);
+                        .inflate(R.layout.item_notes_list_note, null);
                 return new ItemHolder(v);
             }
             case BUTTON: {
                 @SuppressLint("InflateParams") View v = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.btn_notes_dialog, null);
+                        .inflate(R.layout.item_notes_list_btn, null);
                 return new ButtonHolder(v);
             }
         }

@@ -13,11 +13,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.sheduleforictis.R;
-import com.example.sheduleforictis.databinding.FragmentScheduleDayBinding;
+import com.example.sheduleforictis.databinding.FragmentCouplesListBinding;
 import com.example.sheduleforictis.models.Couple;
 import com.example.sheduleforictis.models.Day;
 import com.example.sheduleforictis.ui.schedule.MainViewModel;
-import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListListenerOfNotesFragment;
+import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListOfNotesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +33,10 @@ public class ScheduleDayFragment extends Fragment implements
     private Day day;
     private List<Couple> couples;
 
-    private FragmentScheduleDayBinding binding;
+    private FragmentCouplesListBinding binding;
     private String[] numOfCouples;
 
-    private ListListenerOfNotesFragment listOfNotesFragment;
+    private ListOfNotesFragment listOfNotesFragment;
 
     public ScheduleDayFragment(int positionFragment) {
         this.positionFragment = positionFragment;
@@ -46,7 +46,7 @@ public class ScheduleDayFragment extends Fragment implements
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentScheduleDayBinding.inflate(inflater, container, false);
+        binding = FragmentCouplesListBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -94,13 +94,13 @@ public class ScheduleDayFragment extends Fragment implements
 
     @Override
     public void onItemClick(Couple couple) {
-        listOfNotesFragment = new ListListenerOfNotesFragment();
+        listOfNotesFragment = new ListOfNotesFragment();
         Bundle bundle = new Bundle();
         bundle.putString("nameOfCoupleInListOfNotes", couple.getNameOfCouple());
         String date = day.getDayOfWeek() + ", " + day.getDayOfMonth() + " " + day.getMonth();
         bundle.putString("dateOfCoupleInListOfNotes", date);
         bundle.putInt("numOfCoupleInListOfNotes", couple.getNumOfCouple());
         listOfNotesFragment.setArguments(bundle);
-        listOfNotesFragment.show(getParentFragmentManager(), ListListenerOfNotesFragment.TAG);
+        listOfNotesFragment.show(getParentFragmentManager(), ListOfNotesFragment.TAG);
     }
 }

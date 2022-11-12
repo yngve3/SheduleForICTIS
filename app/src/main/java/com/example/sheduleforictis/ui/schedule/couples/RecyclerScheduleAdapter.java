@@ -3,11 +3,9 @@ package com.example.sheduleforictis.ui.schedule.couples;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sheduleforictis.R;
@@ -54,9 +52,9 @@ public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerSchedu
             tvProfessor.setText(couple.getProfessor());
 
             if (couple.getOnline()) {
-                ivIndicator.setBackgroundResource(R.drawable.indicator_green);
+                ivIndicator.setBackgroundResource(R.drawable.item_couples_list_indicator_green);
             } else {
-                ivIndicator.setBackgroundResource(R.drawable.indicator_red);
+                ivIndicator.setBackgroundResource(R.drawable.item_couples_list_indicator_red);
             }
 
             itemView.setOnClickListener(view -> listener.onItemClick(couple));
@@ -75,7 +73,7 @@ public class RecyclerScheduleAdapter extends RecyclerView.Adapter<RecyclerSchedu
     @Override
     public RecyclerScheduleAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_item, parent, false);
+                .inflate(R.layout.item_couples_list, parent, false);
 
         return new ViewHolder(v);
     }

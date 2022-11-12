@@ -4,8 +4,12 @@ import androidx.lifecycle.LiveData;
 
 import com.example.sheduleforictis.application.App;
 import com.example.sheduleforictis.models.Note;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
+import java.util.Objects;
 
 public class NotesRepository {
     private static NotesRepository instance;
@@ -35,5 +39,11 @@ public class NotesRepository {
 
     public void deleteNote(Note note) {
         new Thread(()-> App.getInstance().getNotesDao().deleteNote(note)).start();
+    }
+
+    public void insertNotes(List<Note> notes) {
+        new Thread(()-> {
+            App.getInstance().getNotesDao().insertNotes(notes);
+        }).start();
     }
 }

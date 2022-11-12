@@ -61,7 +61,7 @@
         android:layout_marginBottom="20dp"
         android:text="Сохранить"
         android:textSize="14sp"
-        android:background="@drawable/btn_create_note_back"
+        android:background="@drawable/item_notes_list_btn_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

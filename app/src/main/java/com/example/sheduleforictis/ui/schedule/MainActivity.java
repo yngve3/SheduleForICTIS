@@ -3,27 +3,33 @@ package com.example.sheduleforictis.ui.schedule;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sheduleforictis.R;
+import com.example.sheduleforictis.application.App;
 import com.example.sheduleforictis.databinding.ActivityMainBinding;
+import com.example.sheduleforictis.models.Note;
+import com.example.sheduleforictis.models.Week;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
     private List<String> tabTitlesMAbbr;
     private List<String> tabTitlesMFull;
 
+    private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebaseDatabase;
+
+    private String group;
+
+    private Map<String, String> groups;
+
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -56,6 +69,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        groups = new LinkedHashMap<>();
+        groups.put("ктбо3-1", "96.htm");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance("https://scheduleforictis-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
+        reference.child("group").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                group = (String) snapshot.getValue();
+                setupTabLayout();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        reference.child("notes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Note> notes = new ArrayList<>();
+                for (DataSnapshot note : snapshot.getChildren()) {
+                    notes.add(note.getValue(Note.class));
+                }
+                mainViewModel.insertNotesInBD(notes);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setupTabLayout() {
 
         LocalDate date;
         int dayOfWeek;
@@ -70,15 +123,13 @@ public class MainActivity extends AppCompatActivity {
             flag = false;
         }
 
-
         tvDateNow = binding.tvDateNow;
         tvStudyWeek = binding.tvStudyWeek;
 
         String[] daysOfWeekAbbr = getResources().getStringArray(R.array.num_of_week_abbr);
         String[] daysOfWeekFull = getResources().getStringArray(R.array.num_of_week_full);
 
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        mainViewModel.getCurrentWeekScheduleFromNet("96.htm").observe(this, week -> {
+        mainViewModel.getCurrentWeekScheduleFromNet(groups.get(group)).observe(this, week -> {
             tabTitlesDate = week.getDaysOfMonthInWeek();
             tabTitlesMAbbr = week.getMonthAbbrInWeek(3);
             tabTitlesMFull = week.getMonthFullInWeek();
@@ -88,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             binding.viewPager.setAdapter(viewPagerDaysOfWeekAdapter);
 
             new TabLayoutMediator(binding.tlDaysOfWeek, binding.viewPager, (tab, position) -> {
-                @SuppressLint("InflateParams") ConstraintLayout tv = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab_title_exp, null);
+                @SuppressLint("InflateParams") ConstraintLayout tv = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.tab_layout_tab_title, null);
                 ((TextView) tv.findViewById(R.id.tvDayOfWeek)).setText(daysOfWeekAbbr[position]);
                 ((TextView) tv.findViewById(R.id.tvDayOfMonth)).setText(String.valueOf(tabTitlesDate.get(position)));
                 ((TextView) tv.findViewById(R.id.tvMonth)).setText(String.valueOf(tabTitlesMAbbr.get(position)));
@@ -99,26 +150,26 @@ public class MainActivity extends AppCompatActivity {
             if (flag && dayOfWeek != 7) {
                 Objects.requireNonNull(binding.tlDaysOfWeek.getTabAt(dayOfWeek - 1)).select();
             }
-        });
 
-        binding.tlDaysOfWeek.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                tvDateNow.setText(daysOfWeekFull[tab.getPosition()] + ", "
-                        + tabTitlesDate.get(tab.getPosition()) + " "
-                        + tabTitlesMFull.get(tab.getPosition())
-                );
-            }
+            binding.tlDaysOfWeek.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    tvDateNow.setText(daysOfWeekFull[tab.getPosition()] + ", "
+                            + tabTitlesDate.get(tab.getPosition()) + " "
+                            + tabTitlesMFull.get(tab.getPosition())
+                    );
+                }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
 
-            }
+                }
 
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
 
-            }
+                }
+            });
         });
     }
 

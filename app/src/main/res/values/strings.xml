@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">SheduleForICTIS</string>
-    <string name="time">Time</string>
-    <string name="name">Name</string>
+    <string name="app_name">Расписание</string>
 
     <string-array name="num_of_week_abbr">
         <item>ПН</item>
