@@ -12,13 +12,16 @@ public class Note {
     private String textOfNote;
     @NonNull private String dateOfNote;
     private int numOfCoupleNote;
+    private String userId;
 
-    public Note(String textOfNote, @NonNull String dateOfNote, int numOfCoupleNote) {
+    public Note(String textOfNote, @NonNull String dateOfNote, int numOfCoupleNote, String  userId) {
         this.textOfNote = textOfNote;
         this.dateOfNote = dateOfNote;
         this.numOfCoupleNote = numOfCoupleNote;
+        this.userId = userId;
     }
 
+    @Ignore
     public Note() {}
 
     public void setTextOfNote(String textOfNote) {
@@ -33,6 +36,10 @@ public class Note {
         this.numOfCoupleNote = numOfCoupleNote;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getTextOfNote() {
         return textOfNote;
     }
@@ -44,6 +51,10 @@ public class Note {
 
     public int getNumOfCoupleNote() {
         return numOfCoupleNote;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     @Ignore

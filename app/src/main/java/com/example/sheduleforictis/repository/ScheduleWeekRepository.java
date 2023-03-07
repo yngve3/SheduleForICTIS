@@ -10,16 +10,18 @@ import com.example.sheduleforictis.network.NetworkService;
 import com.example.sheduleforictis.network.models.RequestModel;
 import com.example.sheduleforictis.utils.ParserModels;
 
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ScheduleWeekRepository {
     private static ScheduleWeekRepository instance;
-    private MutableLiveData<Week> weekSchedule;
-
     private ScheduleWeekRepository() {
-        weekSchedule = new MutableLiveData<>();
+
     }
 
     public static ScheduleWeekRepository getInstance() {
@@ -30,43 +32,19 @@ public class ScheduleWeekRepository {
     }
 
 
-    public LiveData<Week> getCurrentWeekScheduleByIdGroup(String id) {
-        return App.getInstance().getWeekScheduleDao().getWeekSchedule();
+    public LiveData<Week> getWeekScheduleByIdGroup(String group, int weekNum) {
+        return App.getInstance().getWeekScheduleDao().getWeekScheduleByGroupAndWeekNum(group, weekNum);
     }
 
-    public LiveData<Week> getCurrentWeekScheduleByIdGroupFromNet(String id) {
-        NetworkService.getInstance().getApi().getGroupScheduleByID(id).enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(@NonNull Call<RequestModel> call, @NonNull Response<RequestModel> response) {
-                assert response.body() != null;
-                weekSchedule.setValue(ParserModels.parseFromNetwork(response.body()));
-                new Thread(() ->
-                        App.getInstance().getWeekScheduleDao().insertWeekSchedule(ParserModels.parseFromNetwork(response.body()))
-                ).start();
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<RequestModel> call, @NonNull Throwable t) {
-                weekSchedule.setValue(null);
-            }
-        });
-        return weekSchedule;
+    public Single<RequestModel> getCurrentWeekScheduleByIdGroupFromNet(String id) {
+        return NetworkService.getInstance().getApi().getGroupScheduleByID(id);
     }
 
-    /*public MutableLiveData<Week> getScheduleByIdGroupAndWeek(String id, int weekNum) {
-        NetworkService.getInstance().getApi().getGroupScheduleByIDAndWeek(id, weekNum).enqueue(new Callback<RequestModel>() {
-            @Override
-            public void onResponse(@NonNull Call<RequestModel> call, @NonNull Response<RequestModel> response) {
-                assert response.body() != null;
-                weekSchedule.setValue(ParserModels.parseFromNetwork(response.body()));
-            }
+    public Single<RequestModel> getScheduleByIdGroupAndWeekFromNet(String id, int weekNum) {
+        return NetworkService.getInstance().getApi().getGroupScheduleByIDAndWeek(id, weekNum);
+    }
 
-            @Override
-            public void onFailure(@NonNull Call<RequestModel> call, @NonNull Throwable t) {
-                weekSchedule.postValue(null);
-            }
-        });
-
-        return weekSchedule;
-    }*/
+    public void insertScheduleWeek(Week week) {
+        new Thread(() -> App.getInstance().getWeekScheduleDao().insertWeekSchedule(week)).start();
+    }
 }

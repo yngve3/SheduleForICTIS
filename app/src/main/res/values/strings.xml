@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Расписание</string>
+    <string name="favorite_schedules">Между внесенными в этот список группами вы сможете мгновенно переключатся, не набирая конкретных имен в поиске.</string>
+    <string name="registrationLabel">Регистрация</string>
+    <string name="loginHint">Логин</string>
+    <string name="passHint">Пароль</string>
+    <string name="registerText">Зарегистрироваться</string>
+    <string name="entranceLabel">Вход</string>
+    <string name="enterText">Войти</string>
+    <string name="okText">Готово</string>
+    <string name="numGroupAndTeacherText">Номер группы или имя преподавателя</string>
+    <string name="saveText">Сохранить</string>
+    <string name="addNewFavSchedText">Добавить расписание</string>
 
     <string-array name="num_of_week_abbr">
         <item>ПН</item>

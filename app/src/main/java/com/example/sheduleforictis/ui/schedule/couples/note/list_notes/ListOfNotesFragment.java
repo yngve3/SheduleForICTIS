@@ -18,6 +18,7 @@ import com.example.sheduleforictis.models.Note;
 import com.example.sheduleforictis.ui.schedule.couples.note.NotesViewModel;
 import com.example.sheduleforictis.ui.schedule.couples.note.edit_note.EditNoteFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class ListOfNotesFragment extends BottomSheetDialogFragment implements
 
     @Override
     public void onCreateNote() {
-        viewModel.editNote(new Note("", dateOfCouple, numOfCouple), nameOfCouple);
+        viewModel.editNote(new Note("", dateOfCouple, numOfCouple, FirebaseAuth.getInstance().getUid()), nameOfCouple);
         showEditNoteFragment();
     }
 

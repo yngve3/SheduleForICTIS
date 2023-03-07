@@ -24,6 +24,6 @@ public class ScheduleDayFragmentViewModel extends ViewModel {
     }
 
     private LiveData<Week> loadCurrentWeekSchedule(String id) {
-        return repository.getCurrentWeekScheduleByIdGroup(id);
+        return new MutableLiveData<>();
     }
 }

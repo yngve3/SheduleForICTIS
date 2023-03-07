@@ -21,8 +21,8 @@ public interface NotesDao {
     @Insert(onConflict = REPLACE)
     void insertNotes(List<Note> notes);
 
-    @Query("SELECT * FROM note_table WHERE dateOfNote = :dateOfNotes AND numOfCoupleNote = :numOfCoupleNote")
-    LiveData<List<Note>> getNotesOfCouple(String dateOfNotes, int numOfCoupleNote);
+    @Query("SELECT * FROM note_table WHERE dateOfNote = :dateOfNotes AND numOfCoupleNote = :numOfCoupleNote AND userId = :userId")
+    LiveData<List<Note>> getNotesOfCouple(String dateOfNotes, int numOfCoupleNote, String userId);
 
     @Delete
     void deleteNote(Note note);

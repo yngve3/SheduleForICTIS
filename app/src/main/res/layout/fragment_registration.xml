@@ -10,9 +10,9 @@
         android:id="@+id/tvRegistration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="Регистрация"
-        android:textSize="30sp"
+        android:layout_marginTop="@dimen/marginTopLabel"
+        android:text="@string/registrationLabel"
+        android:textSize="@dimen/textSizeLabels"
         android:textColor="?attr/colorGray90"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -23,26 +23,17 @@
         android:id="@+id/etRegEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="@dimen/marginVerB"
+        android:layout_marginHorizontal="@dimen/marginHor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvRegistration"
-        android:hint="Логин"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:endIconTint="?attr/colorGray90"
-        app:hintTextColor="?attr/colorGray90"
-        android:textColorHint="?attr/colorGray90">
+        android:hint="@string/loginHint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/textSize1"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:imeOptions="actionNext"/>
@@ -53,59 +44,20 @@
         android:id="@+id/etRegPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        android:layout_marginTop="@dimen/marginVerS"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRegEmail"
-        android:hint="Пароль"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:endIconMode="password_toggle"
-        app:endIconTint="?attr/colorGray90"
-        app:hintTextColor="?attr/colorGray90"
-        android:textColorHint="?attr/colorGray90">
+        android:hint="@string/passHint">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/textSize1"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:imeOptions="actionNext"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/etRegGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etRegPassword"
-        android:hint="Группа ( КТбо3-1 )"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp"
-        app:boxCornerRadiusTopStart="8dp"
-        app:boxCornerRadiusTopEnd="8dp"
-        app:boxCornerRadiusBottomStart="8dp"
-        app:boxCornerRadiusBottomEnd="8dp"
-        app:hintTextColor="?attr/colorGray90"
-        android:textColorHint="?attr/colorGray90">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:imeOptions="actionDone"/>
+            android:imeOptions="actionDone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,13 +65,16 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="50dp"
-        android:text="Зарегистрироваться"
-        android:textSize="20sp"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        android:layout_marginTop="@dimen/marginVerB"
+        android:text="@string/registerText"
+        android:textSize="@dimen/textSize1"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etRegGroup"
-        android:background="@drawable/item_notes_list_btn_back"/>
+        app:layout_constraintTop_toBottomOf="@id/etRegPassword"
+        app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

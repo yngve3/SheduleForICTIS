@@ -6,16 +6,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.application.App;
+import com.example.sheduleforictis.databinding.ActivityEnterBinding;
 import com.example.sheduleforictis.databinding.ActivityMainBinding;
 import com.example.sheduleforictis.models.Note;
 import com.example.sheduleforictis.models.Week;
+import com.example.sheduleforictis.ui.start.EnterActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +33,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -60,19 +65,18 @@ public class MainActivity extends AppCompatActivity {
 
     private String group;
 
-    private Map<String, String> groups;
-
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        groups = new LinkedHashMap<>();
-        groups.put("ктбо3-1", "96.htm");
 
-        firebaseAuth = FirebaseAuth.getInstance();
+        ActivityEnterBinding bindingTest = ActivityEnterBinding.inflate(getLayoutInflater());
+        setContentView(bindingTest.getRoot());
+
+
+        /*firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance("https://scheduleforictis-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
         reference.child("group").addValueEventListener(new ValueEventListener() {
@@ -105,10 +109,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        binding.imageButton.setOnClickListener(view -> {
+            firebaseAuth.signOut();
+            startActivity(new Intent(getApplicationContext(), EnterActivity.class));
+            finish();
+        });*/
     }
 
-    @SuppressLint("SetTextI18n")
-    private void setupTabLayout() {
+    //@SuppressLint("SetTextI18n")
+    /*private void setupTabLayout() {
 
         LocalDate date;
         int dayOfWeek;
@@ -129,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         String[] daysOfWeekAbbr = getResources().getStringArray(R.array.num_of_week_abbr);
         String[] daysOfWeekFull = getResources().getStringArray(R.array.num_of_week_full);
 
-        mainViewModel.getCurrentWeekScheduleFromNet(groups.get(group)).observe(this, week -> {
+        mainViewModel.getCurrentWeekScheduleFromNet(App.getInstance().getGroupId(group)).observe(this, week -> {
             tabTitlesDate = week.getDaysOfMonthInWeek();
             tabTitlesMAbbr = week.getMonthAbbrInWeek(3);
             tabTitlesMFull = week.getMonthFullInWeek();
@@ -145,11 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 ((TextView) tv.findViewById(R.id.tvMonth)).setText(String.valueOf(tabTitlesMAbbr.get(position)));
                 tab.setCustomView(tv);
             }).attach();
-
-
-            if (flag && dayOfWeek != 7) {
-                Objects.requireNonNull(binding.tlDaysOfWeek.getTabAt(dayOfWeek - 1)).select();
-            }
 
             binding.tlDaysOfWeek.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
@@ -170,8 +175,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             });
+
+            if (flag && dayOfWeek != 7) {
+                Objects.requireNonNull(binding.tlDaysOfWeek.getTabAt(dayOfWeek - 1)).select();
+            }
         });
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

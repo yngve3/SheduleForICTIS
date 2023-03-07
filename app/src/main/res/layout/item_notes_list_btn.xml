@@ -17,7 +17,6 @@
         android:gravity="center"
         android:paddingHorizontal="40dp"
         android:paddingVertical="10dp"
-        android:background="@drawable/item_notes_list_btn_back"
         android:layout_marginHorizontal="70dp"
         android:layout_marginVertical="4dp"
         app:layout_constraintBottom_toBottomOf="parent"

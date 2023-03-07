@@ -2,29 +2,33 @@ package com.example.sheduleforictis.application;
 
 import android.app.Application;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.room.Room;
 
+import com.example.sheduleforictis.database.favoriteSchedules.FavoriteSchedulesDao;
+import com.example.sheduleforictis.database.mDatabase;
 import com.example.sheduleforictis.database.notes.NotesDao;
-import com.example.sheduleforictis.database.notes.NotesDatabase;
 import com.example.sheduleforictis.database.schedule.WeekScheduleDao;
-import com.example.sheduleforictis.database.schedule.WeekScheduleDatabase;
 
 public class App extends Application {
     private static App instance;
-    private WeekScheduleDatabase weekScheduleDatabase;
-    private NotesDatabase notesDatabase;
+    private mDatabase mDatabase;
+    public static final String SETTINGS_NAME = "settings";
+    public static final String IS_HAVE_ACCOUNT_SETTING = "isNotAccount";
+    public boolean isHaveAccount;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         instance = this;
-        weekScheduleDatabase = Room
-                .databaseBuilder(this, WeekScheduleDatabase.class, "weekScheduleDatabase")
+        mDatabase = Room
+                .databaseBuilder(this, mDatabase.class, "Database")
+                .fallbackToDestructiveMigration()
                 .build();
 
-        notesDatabase = Room
-                .databaseBuilder(this, NotesDatabase.class, "notesDatabase")
-                .build();
+        isHaveAccount = getSharedPreferences(SETTINGS_NAME, MODE_PRIVATE)
+                .getBoolean(IS_HAVE_ACCOUNT_SETTING, false);
     }
 
     public static App getInstance() {
@@ -32,8 +36,10 @@ public class App extends Application {
     }
 
     public WeekScheduleDao getWeekScheduleDao() {
-        return weekScheduleDatabase.weekScheduleDao();
+        return mDatabase.weekScheduleDao();
     }
 
-    public NotesDao getNotesDao() { return  notesDatabase.notesDao(); }
+    public NotesDao getNotesDao() { return  mDatabase.notesDao(); }
+
+    public FavoriteSchedulesDao getFavoriteSchedulesDao() { return mDatabase.favoriteSchedulesDao(); }
 }

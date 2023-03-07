@@ -23,7 +23,7 @@ public class MainViewModel extends ViewModel {
     }
 
     public LiveData<Week> getCurrentWeekScheduleFromNet(String id) {
-        weekSchedule = scheduleWeekRepository.getCurrentWeekScheduleByIdGroupFromNet(id);
+        //weekSchedule = scheduleWeekRepository.getCurrentWeekScheduleByIdGroupFromNet(id);
         return weekSchedule;
     }
 
@@ -37,7 +37,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private LiveData<Week> loadCurrentWeekSchedule(String id) {
-        return scheduleWeekRepository.getCurrentWeekScheduleByIdGroup(id);
+        return new MutableLiveData<>();
     }
 
 }

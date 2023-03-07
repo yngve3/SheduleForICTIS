@@ -1,32 +1,36 @@
 package com.example.sheduleforictis.ui.start;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.sheduleforictis.databinding.FragmentRegistrationBinding;
-import com.example.sheduleforictis.ui.schedule.MainActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.sheduleforictis.models.LoginModel;
+import com.example.sheduleforictis.repository.AuthRepository;
+import com.example.sheduleforictis.utils.AuthInputChecker;
 
-import java.util.Locale;
 import java.util.Objects;
 
 public class RegistrationFragment extends Fragment {
 
+    public interface OnRegisterEndsListener {
+        void onRegisterEnds();
+    }
+
     private FragmentRegistrationBinding binding;
 
-    private FirebaseAuth firebaseAuth;
+    private final OnRegisterEndsListener listener;
 
+    public RegistrationFragment(OnRegisterEndsListener listener) {
+        this.listener = listener;
+    }
 
     @Nullable
     @Override
@@ -38,18 +42,30 @@ public class RegistrationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
         binding.btnRegister.setOnClickListener((view1 -> {
             String email = Objects.requireNonNull(binding.etRegEmail.getEditText()).getText().toString();
             String pass = Objects.requireNonNull(binding.etRegPassword.getEditText()).getText().toString();
 
-            if (isEmailValid(email) && isPassValid(pass)) {
-                register(email, pass);
+            boolean inputIsCorrect = true;
+            if (!AuthInputChecker.isEmailValid(email)) {
+                binding.etRegEmail.setError("E-mail некорректен");
+                inputIsCorrect = false;
+            } else {
+                binding.etRegEmail.setErrorEnabled(false);
+            }
+            if (!AuthInputChecker.isPassValid(pass)) {
+                binding.etRegPassword.setError("Пароль некорректен");
+                inputIsCorrect = false;
+            } else {
+                binding.etRegPassword.setErrorEnabled(false);
+            }
+
+            if (inputIsCorrect) {
+                register(new LoginModel(email, pass));
             }
         }));
 
-        Objects.requireNonNull(binding.etRegGroup.getEditText()).setOnEditorActionListener((textView, i, keyEvent) -> {
+        Objects.requireNonNull(binding.etRegPassword.getEditText()).setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 binding.btnRegister.callOnClick();
                 return true;
@@ -58,27 +74,17 @@ public class RegistrationFragment extends Fragment {
         });
     }
 
-    private void createUserInDB() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance("https://scheduleforictis-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = firebaseDatabase.getReference(Objects.requireNonNull(firebaseAuth.getUid()));
-        reference.child("group")
-                .setValue(Objects.requireNonNull(binding.etRegGroup.getEditText()).getText().toString().toLowerCase(Locale.ROOT));
-    }
-
-    private void register(String email, String pass) {
-        firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(task -> {
-                    createUserInDB();
-                    startActivity(new Intent(getContext(), MainActivity.class));
-                });
-    }
-
-    private boolean isEmailValid(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private boolean isPassValid(String password) {
-        if (password.length() < 8) return false;
-        return true;
+    private void register(LoginModel loginModel) {
+        AuthRepository.getInstance().register(loginModel).observe(getViewLifecycleOwner(), authResult -> {
+            switch (authResult) {
+                case SUCCESS: {
+                    listener.onRegisterEnds();
+                    break;
+                }
+                case FAIL: {
+                    Toast.makeText(requireContext(), "Что-то пошло не так, повторите попытку", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }

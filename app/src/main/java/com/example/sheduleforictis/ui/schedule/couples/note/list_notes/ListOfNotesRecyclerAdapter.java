@@ -116,7 +116,7 @@ public class ListOfNotesRecyclerAdapter extends RecyclerView.Adapter<RecyclerVie
             tvDateOfNote.setText(note.getDateOfNote());
             tvNoteNameOfCouple.setText(nameOfCouple);
 
-            itemView.setOnClickListener(view -> { onNotesChangedListener.onEditNote(note); });
+            itemView.setOnClickListener(view -> onNotesChangedListener.onEditNote(note));
         }
     }
 

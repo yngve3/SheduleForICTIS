@@ -14,6 +14,9 @@ public interface WeekScheduleDao {
     @Insert(onConflict = REPLACE)
     void insertWeekSchedule(Week week);
 
-    @Query("SELECT * FROM week_schedule")
-    LiveData<Week> getWeekSchedule();
+    @Query("SELECT * FROM week_schedule WHERE `group`=:group")
+    LiveData<Week> getWeekScheduleByGroup(String group);
+
+    @Query("SELECT * FROM week_schedule WHERE `group`=:group AND numOfWeek=:weekNum")
+    LiveData<Week> getWeekScheduleByGroupAndWeekNum(String group, int weekNum);
 }

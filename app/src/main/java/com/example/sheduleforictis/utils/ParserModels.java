@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class ParserModels {
     public static Week parseFromNetwork(RequestModel requestModel) {
         int numOfWeek = requestModel.getTable().getWeek();
+        String group = requestModel.getTable().getGroup();
         List<List<String>> table = requestModel.getTable().getTable();
 
         List<Day> days = new ArrayList<>();
@@ -68,7 +69,7 @@ public class ParserModels {
             days.add(new Day(dayOfWeek, dayOfMonth, month, numOfWeek, couples));
         }
 
-        return new Week(numOfWeek, days);
+        return new Week(numOfWeek, days, group);
     }
 
 }

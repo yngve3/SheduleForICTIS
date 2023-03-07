@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SheduleForICTIS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SheduleForICTIS" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorAccent">@color/colorMain</item>
         <item name="colorPrimary">@color/colorWhite</item>
@@ -18,12 +18,11 @@
         <!-- Customize your theme here. -->
 
         <item name="colorGray90">@color/colorGray90</item>
+        <item name="colorGray80">@color/colorGray80</item>
         <item name="colorGray70">@color/colorGray70</item>
         <item name="colorGray30">@color/colorGray30</item>
-        <item name="colorGray10">@color/colorGray10</item>
-
-        <item name="colorGray80">@color/colorGray80</item>
         <item name="colorGray20">@color/colorGray20</item>
+        <item name="colorGray10">@color/colorGray10</item>
 
         <item name="colorWhite">@color/colorWhite</item>
         <item name="colorBlack">@color/colorBlack</item>
@@ -35,7 +34,6 @@
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
-
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">

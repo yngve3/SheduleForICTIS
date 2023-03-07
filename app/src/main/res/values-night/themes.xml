@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SheduleForICTIS" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.SheduleForICTIS" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorAccent">@color/colorMain</item>
         <item name="colorPrimary">@color/colorWhite</item>
@@ -31,13 +31,35 @@
         <item name="colorMain">@color/colorGray10</item>
 
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="textInputStyle">@style/Widget.SheduleForICTIS.TextInputLayout</item>
+        <item name="materialButtonStyle">@style/Widget.SheduleForICTIS.Button</item>
 
+    </style>
+
+    <style name="Widget.SheduleForICTIS.TextInputLayout" parent="Widget.Material3.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">?attr/colorGray10</item>
+        <item name="android:textColorHint">?attr/colorGray90</item>
+        <item name="endIconTint">?attr/colorGray90</item>
+        <item name="boxCornerRadiusTopStart">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/cornerRadius1</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/cornerRadius1</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+    </style>
+    
+    <style name="Widget.SheduleForICTIS.Button" parent="Widget.Material3.Button">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">?attr/colorGray10</item>
+        <item name="cornerRadius">@dimen/cornerRadius1</item>
+        <item name="backgroundTint">?attr/colorGray90</item>
+        <item name="rippleColor">?attr/colorGray20</item>
     </style>
 
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
-
     </style>
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">

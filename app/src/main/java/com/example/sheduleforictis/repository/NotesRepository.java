@@ -24,7 +24,7 @@ public class NotesRepository {
     }
 
     public LiveData<List<Note>> getNotesOfCouple(String dateOfNotes, int numOfCoupleNote) {
-        return App.getInstance().getNotesDao().getNotesOfCouple(dateOfNotes, numOfCoupleNote);
+        return App.getInstance().getNotesDao().getNotesOfCouple(dateOfNotes, numOfCoupleNote, FirebaseAuth.getInstance().getUid());
     }
 
     public void insertNote(Note note) {

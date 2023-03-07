@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="?attr/colorWhite">
+
+    <ImageView
+        android:id="@+id/launchIcon"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/marginTopLabel"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        />
+
+    <TextView
+        android:id="@+id/launchLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Войдите в аккаунт, чтобы не потерять свои заметки и избранные расписания"
+        android:textColor="?attr/colorGray90"
+        android:layout_marginTop="@dimen/marginVerB"
+        app:layout_constraintTop_toBottomOf="@id/launchIcon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        android:textSize="@dimen/textSize1"
+        android:textAlignment="center"
+        />
+
+    <Button
+        android:id="@+id/launchEnterBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launchLabel"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        android:layout_marginTop="@dimen/marginVerB"
+        android:text="@string/enterText"
+        android:textSize="@dimen/textSize1"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/launchSkipBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/launchEnterBtn"
+        android:text="Пропустить"
+        android:textSize="@dimen/textSize1"
+        android:layout_marginHorizontal="@dimen/marginHor"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

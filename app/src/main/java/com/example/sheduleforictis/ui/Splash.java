@@ -2,6 +2,7 @@ package com.example.sheduleforictis.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,13 +17,15 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        Intent intent;
 
         if (firebaseAuth.getCurrentUser() == null) {
-            startActivity(new Intent(this, EnterActivity.class));
+            intent = new Intent(this, EnterActivity.class);
         } else {
-            startActivity(new Intent(this, MainActivity.class));
+            intent = new Intent(this, MainActivity.class);
         }
 
+        startActivity(intent);
         finish();
     }
 }

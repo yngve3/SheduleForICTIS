@@ -1,25 +1,28 @@
 package com.example.sheduleforictis.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.sheduleforictis.database.schedule.Converters;
+import com.example.sheduleforictis.database.Converters;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(tableName = "week_schedule")
+@Entity(tableName = "week_schedule", primaryKeys = {"numOfWeek", "group"})
 public class Week {
-    @PrimaryKey
     private int numOfWeek;
+    @NonNull
+    private String group;
     @TypeConverters({Converters.class})
     private List<Day> week;
 
-    public Week(int numOfWeek, List<Day> week) {
+    public Week(int numOfWeek, List<Day> week, @NonNull String group) {
         this.numOfWeek = numOfWeek;
         this.week = week;
+        this.group = group;
     }
 
     public void setNumOfWeek(int numOfWeek) {
@@ -36,6 +39,10 @@ public class Week {
 
     public List<Day> getWeek() {
         return week;
+    }
+
+    public String getGroup() {
+        return group;
     }
 
     @Ignore

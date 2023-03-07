@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sheduleforictis.ui.schedule.favorite.FavoriteScheduleListAdapter;
+
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     public interface ItemTouchHelperAdapter {
@@ -18,7 +20,8 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        if (viewHolder instanceof ListOfNotesRecyclerAdapter.ItemHolder) {
+        if (viewHolder instanceof ListOfNotesRecyclerAdapter.ItemHolder ||
+        viewHolder instanceof FavoriteScheduleListAdapter.ItemHolder) {
             int dragFlags = 0;
             int swipeFlags = ItemTouchHelper.START;
             return makeMovementFlags(dragFlags, swipeFlags);

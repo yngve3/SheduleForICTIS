@@ -1,60 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    >
+    android:layout_gravity="center_horizontal"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/item_notes_list_note_back"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_notes_list_note_back"
-            android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="10dp"
-            android:layout_marginVertical="4dp">
+    <TextView
+        android:id="@+id/tvTextNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Текст заметки"
+        android:textColor="?attr/colorGray90"
+        android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/tvTextNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Текст заметки"
-            android:textSize="14sp"
-            android:textColor="?attr/colorGray90"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constrainedWidth="true"
-            />
+    <TextView
+        android:id="@+id/tvDateOfNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Пятница, 11 ноября"
+        android:textColor="?attr/colorGray70"
+        android:textSize="11sp" />
 
-        <TextView
-            android:id="@+id/tvDateOfNote"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Пятница, 11 ноября"
-            android:layout_marginTop="4dp"
-            android:textSize="11sp"
-            app:layout_constraintTop_toBottomOf="@id/tvTextNote"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="?attr/colorGray70"
-            app:layout_constraintHorizontal_bias="0.0"/>
+    <TextView
+        android:id="@+id/tvNoteNameOfCouple"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Иностранный язык для деловой коммуникацииka"
+        android:textColor="?attr/colorGray70"
+        android:textSize="11sp" />
 
-        <TextView
-            android:id="@+id/tvNoteNameOfCouple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Иностранный язык для деловой коммуникации"
-            android:layout_marginTop="4dp"
-            android:textSize="11sp"
-            android:textColor="?attr/colorGray70"
-            app:layout_constraintTop_toBottomOf="@id/tvDateOfNote"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constrainedWidth="true"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</LinearLayout>
