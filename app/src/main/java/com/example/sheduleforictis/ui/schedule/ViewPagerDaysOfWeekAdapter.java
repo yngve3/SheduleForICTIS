@@ -7,7 +7,6 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.sheduleforictis.ui.schedule.couples.ScheduleDayFragment;
-import com.example.sheduleforictis.models.Week;
 
 public class ViewPagerDaysOfWeekAdapter extends FragmentStateAdapter {
     public ViewPagerDaysOfWeekAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

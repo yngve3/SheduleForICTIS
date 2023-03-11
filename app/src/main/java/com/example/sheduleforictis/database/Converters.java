@@ -3,7 +3,7 @@ package com.example.sheduleforictis.database;
 import androidx.room.TypeConverter;
 
 import com.example.sheduleforictis.models.Couple;
-import com.example.sheduleforictis.models.Day;
+import com.example.sheduleforictis.models.DaySchedule;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -13,19 +13,19 @@ import java.util.List;
 
 public class Converters {
     @TypeConverter
-    public List<Day> stringToDayEnt(String dayEnt) {
+    public List<DaySchedule> stringToDayEnt(String dayEnt) {
         Gson gson = new Gson();
 
         if (dayEnt == null) {
             Collections.emptyList();
         }
 
-        Type listType = new TypeToken<List<Day>>() {}.getType();
+        Type listType = new TypeToken<List<DaySchedule>>() {}.getType();
         return gson.fromJson(dayEnt, listType);
     }
 
     @TypeConverter
-    public String dayEntToString(List<Day> list) {
+    public String dayEntToString(List<DaySchedule> list) {
         Gson gson = new Gson();
         return gson.toJson(list);
     }

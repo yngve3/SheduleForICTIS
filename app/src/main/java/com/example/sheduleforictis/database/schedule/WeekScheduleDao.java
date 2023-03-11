@@ -7,16 +7,16 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.sheduleforictis.models.Week;
+import com.example.sheduleforictis.models.WeekSchedule;
 
 @Dao
 public interface WeekScheduleDao {
     @Insert(onConflict = REPLACE)
-    void insertWeekSchedule(Week week);
+    void insertWeekSchedule(WeekSchedule weekSchedule);
 
-    @Query("SELECT * FROM week_schedule WHERE `group`=:group")
-    LiveData<Week> getWeekScheduleByGroup(String group);
+    @Query("SELECT * FROM WeekSchedule WHERE `group`=:group")
+    LiveData<WeekSchedule> getWeekScheduleByGroup(String group);
 
-    @Query("SELECT * FROM week_schedule WHERE `group`=:group AND numOfWeek=:weekNum")
-    LiveData<Week> getWeekScheduleByGroupAndWeekNum(String group, int weekNum);
+    @Query("SELECT * FROM WeekSchedule WHERE `group`=:group AND numOfWeek=:weekNum")
+    LiveData<WeekSchedule> getWeekScheduleByGroupAndWeekNum(String group, int weekNum);
 }

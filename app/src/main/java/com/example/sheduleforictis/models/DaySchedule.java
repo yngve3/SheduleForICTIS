@@ -1,17 +1,15 @@
 package com.example.sheduleforictis.models;
 
-import androidx.room.Entity;
-
 import java.util.List;
 
-public class Day {
+public class DaySchedule {
     private String dayOfWeek;
     private int dayOfMonth;
     private String month;
     private int numOfWeek;
     private List<Couple> couples;
 
-    public Day(String dayOfWeek, int dayOfMonth, String month, int numOfWeek, List<Couple> couples) {
+    public DaySchedule(String dayOfWeek, int dayOfMonth, String month, int numOfWeek, List<Couple> couples) {
         this.dayOfWeek = dayOfWeek;
         this.dayOfMonth = dayOfMonth;
         this.month = month;

@@ -14,8 +14,8 @@ public class App extends Application {
     private static App instance;
     private mDatabase mDatabase;
     public static final String SETTINGS_NAME = "settings";
-    public static final String IS_HAVE_ACCOUNT_SETTING = "isNotAccount";
-    public boolean isHaveAccount;
+    public static final String IS_FIRST_ENTER_SETTING = "isFirstEnter";
+    public boolean isFirstEnter;
 
     @Override
     public void onCreate() {
@@ -27,8 +27,8 @@ public class App extends Application {
                 .fallbackToDestructiveMigration()
                 .build();
 
-        isHaveAccount = getSharedPreferences(SETTINGS_NAME, MODE_PRIVATE)
-                .getBoolean(IS_HAVE_ACCOUNT_SETTING, false);
+        isFirstEnter = getSharedPreferences(SETTINGS_NAME, MODE_PRIVATE)
+                .getBoolean(IS_FIRST_ENTER_SETTING, true);
     }
 
     public static App getInstance() {
@@ -42,4 +42,15 @@ public class App extends Application {
     public NotesDao getNotesDao() { return  mDatabase.notesDao(); }
 
     public FavoriteSchedulesDao getFavoriteSchedulesDao() { return mDatabase.favoriteSchedulesDao(); }
+
+    public boolean isFirstEnter() {
+        return isFirstEnter;
+    }
+
+    public void setFirstEnter(boolean isFirstEnter) {
+        this.isFirstEnter = isFirstEnter;
+        getSharedPreferences(SETTINGS_NAME, MODE_PRIVATE).edit()
+                .putBoolean(IS_FIRST_ENTER_SETTING, isFirstEnter)
+                .apply();
+    }
 }

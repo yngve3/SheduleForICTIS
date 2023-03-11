@@ -1,8 +1,8 @@
 package com.example.sheduleforictis.utils;
 
 import com.example.sheduleforictis.models.Couple;
-import com.example.sheduleforictis.models.Day;
-import com.example.sheduleforictis.models.Week;
+import com.example.sheduleforictis.models.DaySchedule;
+import com.example.sheduleforictis.models.WeekSchedule;
 import com.example.sheduleforictis.network.models.RequestModel;
 
 import java.util.ArrayList;
@@ -11,12 +11,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ParserModels {
-    public static Week parseFromNetwork(RequestModel requestModel) {
+    public static WeekSchedule parseFromNetwork(RequestModel requestModel) {
         int numOfWeek = requestModel.getTable().getWeek();
         String group = requestModel.getTable().getGroup();
         List<List<String>> table = requestModel.getTable().getTable();
 
-        List<Day> days = new ArrayList<>();
+        List<DaySchedule> daySchedules = new ArrayList<>();
 
         for (int i = 2; i < table.size(); i++) {
             String dayOfWeek = "";
@@ -66,10 +66,10 @@ public class ParserModels {
                 couples.add(couple);
             }
 
-            days.add(new Day(dayOfWeek, dayOfMonth, month, numOfWeek, couples));
+            daySchedules.add(new DaySchedule(dayOfWeek, dayOfMonth, month, numOfWeek, couples));
         }
 
-        return new Week(numOfWeek, days, group);
+        return new WeekSchedule(numOfWeek, daySchedules, group);
     }
 
 }

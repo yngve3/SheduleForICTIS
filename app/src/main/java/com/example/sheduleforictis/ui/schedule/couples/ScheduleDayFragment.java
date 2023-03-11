@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.databinding.FragmentCouplesListBinding;
 import com.example.sheduleforictis.models.Couple;
-import com.example.sheduleforictis.models.Day;
+import com.example.sheduleforictis.models.DaySchedule;
 import com.example.sheduleforictis.ui.schedule.MainViewModel;
 import com.example.sheduleforictis.ui.schedule.couples.note.list_notes.ListOfNotesFragment;
 
@@ -30,7 +30,7 @@ public class ScheduleDayFragment extends Fragment implements
 
     private RecyclerScheduleAdapter recyclerScheduleAdapter;
     private MainViewModel viewModel;
-    private Day day;
+    private DaySchedule daySchedule;
     private List<Couple> couples;
 
     private FragmentCouplesListBinding binding;
@@ -60,14 +60,14 @@ public class ScheduleDayFragment extends Fragment implements
     public void onResume() {
         super.onResume();
         viewModel.getCurrentWeekScheduleByIdGroup("96.htm").observe(getViewLifecycleOwner(), week -> {
-            day = week.getDay(positionFragment);
+            daySchedule = week.getDay(positionFragment);
             setupCouples();
         });
     }
 
     private void setupCouples() {
         couples = new ArrayList<>();
-        for (Couple couple : day.getCouples()) {
+        for (Couple couple : daySchedule.getCouples()) {
             if (!couple.getNameOfCouple().equals("")) {
                 couple.setNumOfCoupleStr(numOfCouples[couple.getNumOfCouple() - 1]);
                 couples.add(couple);
@@ -97,7 +97,7 @@ public class ScheduleDayFragment extends Fragment implements
         listOfNotesFragment = new ListOfNotesFragment();
         Bundle bundle = new Bundle();
         bundle.putString("nameOfCoupleInListOfNotes", couple.getNameOfCouple());
-        String date = day.getDayOfWeek() + ", " + day.getDayOfMonth() + " " + day.getMonth();
+        String date = daySchedule.getDayOfWeek() + ", " + daySchedule.getDayOfMonth() + " " + daySchedule.getMonth();
         bundle.putString("dateOfCoupleInListOfNotes", date);
         bundle.putInt("numOfCoupleInListOfNotes", couple.getNumOfCouple());
         listOfNotesFragment.setArguments(bundle);

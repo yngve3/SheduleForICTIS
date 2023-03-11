@@ -49,7 +49,7 @@ public class LaunchFragment extends Fragment {
 
     private void writeSetting(boolean isHaveAccount) {
         requireContext().getSharedPreferences(App.SETTINGS_NAME, Context.MODE_PRIVATE).edit()
-                .putBoolean(App.IS_HAVE_ACCOUNT_SETTING, isHaveAccount)
+                .putBoolean(App.IS_FIRST_ENTER_SETTING, isHaveAccount)
                 .apply();
     }
 }

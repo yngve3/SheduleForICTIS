@@ -6,18 +6,17 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.sheduleforictis.R;
 import com.example.sheduleforictis.databinding.ActivityEnterBinding;
+import com.example.sheduleforictis.repository.AuthRepository;
 import com.example.sheduleforictis.ui.schedule.MainActivity;
 import com.example.sheduleforictis.ui.schedule.favorite.FavoriteScheduleListAddNewFragment;
 import com.example.sheduleforictis.ui.schedule.favorite.FavoriteScheduleListFragment;
 
 public class EnterActivity extends AppCompatActivity {
 
-    private ActivityEnterBinding binding;
     private LoginFragment loginFragment;
     private RegistrationFragment registrationFragment;
     private FavoriteScheduleListFragment favoriteScheduleListFragment;
@@ -28,7 +27,7 @@ public class EnterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityEnterBinding.inflate(getLayoutInflater());
+        ActivityEnterBinding binding = ActivityEnterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         loginFragment = new LoginFragment(new LoginFragment.OnLoginChangeListener() {
@@ -39,7 +38,7 @@ public class EnterActivity extends AppCompatActivity {
 
             @Override
             public void login() {
-               startActivityM(MainActivity.class);
+               endEnterAndStartActivity(MainActivity.class);
             }
         });
 
@@ -53,7 +52,7 @@ public class EnterActivity extends AppCompatActivity {
 
             @Override
             public void onSaveListFavSchedules() {
-                startActivityM(MainActivity.class);
+                endEnterAndStartActivity(MainActivity.class);
             }
         });
 
@@ -77,7 +76,8 @@ public class EnterActivity extends AppCompatActivity {
 
     }
 
-    public void startActivityM(Class<?> cls) {
+    public void endEnterAndStartActivity(Class<?> cls) {
+        AuthRepository.getInstance().setFirstEnter(false);
         startActivity(new Intent(getApplicationContext(), cls));
         finish();
     }
